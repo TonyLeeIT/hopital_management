@@ -6,8 +6,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+
+import java.util.Date;
 import java.util.List;
+
 
 
 @Repository
@@ -19,4 +23,10 @@ public interface ExaminationRepository extends PagingAndSortingRepository<Examin
             "group by name_patient , name_disease " +
             "order by count(e.idExamination) desc")
     Page<DiseaseSumaryDto> getPatientSumary(Pageable pageable);
+
+    @Query("select E.atTime from ExaminationEntity E where E.idExamination = :idExamination")
+    Date getAtTime(@Param(value = "idExamination") Integer idExamination);
+
+    @Query("select E.idExamination from ExaminationEntity E")
+    List<Integer> getIdExamination();
 }

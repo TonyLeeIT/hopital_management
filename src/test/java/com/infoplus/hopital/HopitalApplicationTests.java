@@ -5,6 +5,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.infoplus.hopital.dto.DiseaseSumaryDto;
 import com.infoplus.hopital.repository.DoctorRepository;
 import com.infoplus.hopital.repository.ExaminationRepository;
+import com.infoplus.hopital.repository.TreatmentRepositoryCustom;
+import com.infoplus.hopital.service.TreatmentService;
 import com.infoplus.hopital.util.Util;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +14,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.stream.Stream;
 
 
 @SpringBootTest
@@ -27,10 +33,17 @@ class HopitalApplicationTests {
     @Autowired
     ExaminationRepository examinationRepository;
 
+    @Autowired
+    TreatmentRepositoryCustom treatmentRepositoryCustom;
+
+    @Autowired
+    TreatmentService treatmentService;
+
 
     @Test
-    @Transactional(readOnly = true)
-    void contextLoads() throws JsonProcessingException {
+    @Modifying
+    @Transactional
+    void contextLoads() throws JsonProcessingException, ParseException {
         Pageable pageable = PageRequest.of(0 , 10);
         //doctorRepository.findAll(pageable);
 
@@ -52,15 +65,25 @@ class HopitalApplicationTests {
 //        for (Object[] item : results){
 //            System.out.println(item[0] + "       " + item[1] +"     " +item[2] +"   "+ item[3]);
 //        }
-        List<String> list = new ArrayList<>();
-        Page<DiseaseSumaryDto> results = examinationRepository.getPatientSumary(pageable);
+//        List<String> list = new ArrayList<>();
+//        Page<DiseaseSumaryDto> results = examinationRepository.getPatientSumary(pageable);
+//
+//        for(DiseaseSumaryDto item : results){
+//
+//            list.add(Util.convertIntoTimeStamp(item.getAtTime()));
+//        }
+//
 
-        for(DiseaseSumaryDto item : results){
+//        Stream<String> convert = examinationRepository.getAtTime().map(item -> (Util.convertIntoTimeStamp(item)));
+//
+//        System.out.println(mapper.writeValueAsString(convert.toArray()));
 
-            list.add(Util.convertIntoTimeStamp(item.getAtTime()));
-        }
+        //System.out.println(treatmentRepositoryCustom.pushTreatmentDownDatabase("YT07",Util.covertStringToDate("2021-03-05"),true));
 
-        System.out.println(mapper.writeValueAsString(results));
+        treatmentService.callProcedureTreatment("YT09",true);
+
+
+ //       System.out.println(Util.convertIntoTimeStamp(examinationRepository.getAtTime(1)));
     }
 
 }

@@ -1,6 +1,8 @@
 package com.infoplus.hopital.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,10 +17,12 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@ApiModel(value = "Treatment model")
 public class TreatmentEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @ApiModelProperty(notes = "The database generated Treatment ID")
     @Column(name = "id_treatment")
     private Integer idTreatment;
 

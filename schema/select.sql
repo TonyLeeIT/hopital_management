@@ -11,3 +11,13 @@ select distinct p.name_patient , e.name_disease , e.at_time  ,  count(e.id_exami
 	where DATEDIFF ('2020-07-31', e.at_time) < 31
     group by name_patient , name_disease 
     order by numOfPatient desc;
+    
+    
+    
+select e.id_examination , d.id_doctor , (select id_nurse from nurse )  from(
+		examination e inner join doctor d on e.id_doctor = d.id_doctor
+);
+
+select p.name_patient , e.name_disease from patient p left join examination e  on p.id_patient  = e.id_patient ;
+
+
