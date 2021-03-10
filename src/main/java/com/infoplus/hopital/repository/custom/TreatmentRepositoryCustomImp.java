@@ -1,6 +1,5 @@
 package com.infoplus.hopital.repository.custom;
 
-import com.infoplus.hopital.repository.TreatmentRepositoryCustom;
 import org.hibernate.procedure.ProcedureOutputs;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,8 +9,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.ParameterMode;
 import javax.persistence.PersistenceContext;
 import javax.persistence.StoredProcedureQuery;
-import java.util.Date;
-
 
 @Repository
 public class TreatmentRepositoryCustomImp implements TreatmentRepositoryCustom {

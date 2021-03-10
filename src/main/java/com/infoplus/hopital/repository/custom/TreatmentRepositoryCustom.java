@@ -1,6 +1,5 @@
-package com.infoplus.hopital.repository;
+package com.infoplus.hopital.repository.custom;
 
-import java.util.Date;
 
 public interface TreatmentRepositoryCustom {
 

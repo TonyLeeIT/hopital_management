@@ -36,4 +36,18 @@ public class DoctorController {
     public ResponseEntity<Page<DoctorEntity>> getAll(@RequestBody SearchRequest searchRequest){
         return ResponseEntity.ok(doctorService.getAll(searchRequest));
     }
+
+    @ApiOperation(value = "Xem danh sách Doctor", response = List.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Thành công"),
+            @ApiResponse(code = 401, message = "Chưa xác thực"),
+            @ApiResponse(code = 403, message = "Truy cập bị cấm"),
+            @ApiResponse(code = 404, message = "Không tìm thấy")
+    })
+    @GetMapping("/api/v1/hopitalmanagement/doctor/{idDoctor}/{nameDoctor}")
+    public ResponseEntity<Page<DoctorEntity>> getByIdAndName(@PathVariable("idDoctor") String idDOctor ,
+                                                             @PathVariable("nameDoctor") String nameDoctor,
+                                                             @RequestBody SearchRequest searchRequest   ){
+        return ResponseEntity.ok(doctorService.getByIdAndName(idDOctor , nameDoctor , searchRequest));
+    }
 }
