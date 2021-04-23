@@ -19,7 +19,7 @@ public interface ExaminationRepository extends PagingAndSortingRepository<Examin
 
     @Query("select distinct  new com.infoplus.hopital.dto.DiseaseSumaryDto(p.namePatient , e.diseaseEntity.name ,e.atTime, count(e.idExamination) ) " +
             "from ExaminationEntity e inner join  PatientEntity p on e.patientEntity.idPatient = p.idPatient " +
-            "where DATEDIFF ('2020-07-31', e.atTime) < 31  " +
+            "where DATEDIFF('2020-07-31', e.atTime) < 31  " +
             "group by name_patient , name_disease " +
             "order by count(e.idExamination) desc")
     Page<DiseaseSumaryDto> getPatientSumary(Pageable pageable);

@@ -4,8 +4,8 @@ import com.infoplus.hopital.model.DoctorEntity;
 import com.infoplus.hopital.model.SearchRequest;
 import com.infoplus.hopital.repository.DoctorRepository;
 import com.infoplus.hopital.repository.custom.DoctorCustomRepository;
+import com.infoplus.hopital.repository.specifications.DoctorSpecification;
 import com.infoplus.hopital.service.DoctorService;
-import com.infoplus.hopital.specifications.DoctorSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -14,8 +14,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-
 
 
 @Service

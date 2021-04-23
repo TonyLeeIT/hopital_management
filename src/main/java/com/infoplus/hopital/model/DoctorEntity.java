@@ -3,10 +3,7 @@ package com.infoplus.hopital.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -26,7 +23,7 @@ public class DoctorEntity implements Serializable {
     @Column(name = "id_doctor")
     private String idDoctor;
 
-    @Column(name = "identity_number", nullable = false , unique = true)
+    @Column(name = "identity_number", nullable = false, unique = true)
     private String identityNumber;
 
     @Column(name = "name_doctor", nullable = false)
@@ -50,11 +47,13 @@ public class DoctorEntity implements Serializable {
     @Column(name = "field", nullable = false)
     private String field;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "doctorEntity", cascade = CascadeType.ALL)
-    @JsonIgnore
+    @OneToMany(mappedBy = "doctorEntity", cascade = CascadeType.ALL)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     private Set<ExaminationEntity> examinationEntity;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "doctorEntity", cascade = CascadeType.ALL)
-    @JsonIgnore
+    @OneToMany(mappedBy = "doctorEntity", cascade = CascadeType.ALL)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     private Set<TreatmentEntity> treatmentEntities;
 }

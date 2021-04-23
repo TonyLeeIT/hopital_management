@@ -1,4 +1,4 @@
-package com.infoplus.hopital.specifications;
+package com.infoplus.hopital.repository.specifications;
 
 import com.infoplus.hopital.model.DoctorEntity;
 import com.infoplus.hopital.model.DoctorEntity_;

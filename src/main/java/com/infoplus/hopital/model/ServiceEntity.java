@@ -2,12 +2,10 @@ package com.infoplus.hopital.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Set;
 
 @Entity
@@ -17,7 +15,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @ApiModel(value = "Service model")
-public class ServiceEntity {
+public class ServiceEntity implements Serializable {
 
     @Id
     @Column(name = "name_service")
@@ -26,11 +24,12 @@ public class ServiceEntity {
     @Column(name = "price" , nullable = false)
     private float price;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany
     @JoinTable(name = "service_treatment", joinColumns = {
             @JoinColumn(name = "name_service", nullable = false)}, inverseJoinColumns = {
             @JoinColumn(name = "id_treatment", nullable = false)}
     )
-    @JsonIgnore
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     private Set<TreatmentEntity> treatmentEntities;
 }
